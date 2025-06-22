@@ -18,17 +18,53 @@ function getComputerChoice() {
   return "Scissors";
 }
 
+// This function takes the player's choice, gets the computer's choice, and shows both on the page
+function playGame(playerChoice) {
+  // Get the computer's choice by calling the function
+  const computerChoice = getComputerChoice();
+  // Get the result div from the HTML
+  const resultDiv = document.getElementById("result");
+
+  // Set a variable for the result message
+  let message = `You chose: ${playerChoice} | Computer chose: ${computerChoice}`;
+
+  // Check for a tie
+  if (playerChoice === computerChoice) {
+    message = `${message} | It's a tie!`;
+  }
+  // Check if player wins
+  if (
+    (playerChoice === "Rock" && computerChoice === "Scissors") ||
+    (playerChoice === "Paper" && computerChoice === "Rock") ||
+    (playerChoice === "Scissors" && computerChoice === "Paper")
+  ) {
+    message = `${message} | You win!`;
+  }
+  // Check if computer wins
+  if (
+    (computerChoice === "Rock" && playerChoice === "Scissors") ||
+    (computerChoice === "Paper" && playerChoice === "Rock") ||
+    (computerChoice === "Scissors" && playerChoice === "Paper")
+  ) {
+    message = `${message} | Computer wins!`;
+  }
+
+  // Show the message on the page
+  resultDiv.textContent = message;
+}
+
 // Add event listener for rock button
 rockButton.addEventListener("click", function() {
-  console.log("You chose: Rock 🪨");
+  // Call playGame with "Rock" when the rock button is clicked
+  playGame("Rock");
 });
-
 // Add event listener for paper button
 paperButton.addEventListener("click", function() {
-  console.log("You chose: Paper 📄");
+  // Call playGame with "Paper" when the paper button is clicked
+  playGame("Paper");
 });
-
 // Add event listener for scissors button
 scissorsButton.addEventListener("click", function() {
-  console.log("You chose: Scissors ✂️");
+  // Call playGame with "Scissors" when the scissors button is clicked
+  playGame("Scissors");
 });
